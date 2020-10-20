@@ -17,9 +17,35 @@ namespace AgendaSalasEventos.ApiTest
     public class TestSalasController
     {
 
+        private readonly ServiceProvider serviceProvider;
+
+        public TestSalasController()
+        {
+            var services = new ServiceCollection();
+
+            services.AddLogging()
+                    .AddTransient<SalasController>()
+                    .AddTransient<SalasService>()
+                    .AddSingleton<IAplicacaoContext, AplicacaoContext>()
+                    .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Information);
+
+            serviceProvider = services.BuildServiceProvider();
+        }
+
         [TestMethod]
         public void TestMethodGetSala()
         {
+            ////var testSala = GetTest
+            var sala = new SalasController(serviceProvider.GetService<ILogger<SalasController>>(), serviceProvider.GetService<SalasService>());
+
+            var resp = Task.Run(async () =>
+            {
+                return await sala.ListarTodasSalasCombo();
+
+            }).GetAwaiter().GetResult().Value;
+
+            Assert.IsNotNull(resp);
+            Assert.IsTrue(resp.Any());
         }
     }
 }

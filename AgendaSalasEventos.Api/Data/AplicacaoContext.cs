@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AgendaSalasEventos.Api.Data
 {
-    public class AplicacaoContext : DbContext
+    public class AplicacaoContext : DbContext, IAplicacaoContext
     {
         public AplicacaoContext(DbContextOptions<AplicacaoContext> options) : base(options)
         {

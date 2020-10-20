@@ -15,11 +15,11 @@ $(document).ready(function ()
     });
 
     //Outro eventos ajax
-    $(document).ajaxStart(function () {
-        console.log('ajaxStart');
-    }).ajaxStop(function () {
-        console.log('ajaxStop');
-    }).ajaxError(function () {
-        console.log('ajaxerror');
-    });
+    //$(document).ajaxStart(function () {
+    //    console.log('ajaxStart');
+    //}).ajaxStop(function () {
+    //    console.log('ajaxStop');
+    //}).ajaxError(function () {
+    //    console.log('ajaxerror');
+    //});
 });

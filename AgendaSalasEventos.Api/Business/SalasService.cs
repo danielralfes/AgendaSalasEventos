@@ -22,7 +22,7 @@ namespace AgendaSalasEventos.Api.Business
         }
         public async Task<List<ResponseSalas>> ListarTodasSalas()
         {
-            _logger.LogInformation("Listar todos os registros");
+            _logger.LogInformation("[SalasService] Listar todos os registros");
 
             var retornaLista = await _db.Salas
                                         .Select(s=> new ResponseSalas()
@@ -39,7 +39,7 @@ namespace AgendaSalasEventos.Api.Business
 
         public async Task<List<ResponseSalasCombo>> ListarTodasSalasCombo()
         {
-            _logger.LogInformation("Listar todos os registros");
+            _logger.LogInformation("[SalasService] Listar todos os registros");
 
             var retornaLista = await _db.Salas
                                         .Select(s => new ResponseSalasCombo()

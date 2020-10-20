@@ -19,13 +19,13 @@ namespace AgendaSalasEventos.Api.Business
 
         public EventosService(ILogger<EventosController> logger, AplicacaoContext db)
         {
-            _logger              = logger;
-            _db                  = db;
+            _logger = logger;
+            _db     = db;
         }
 
         public async Task<List<ResponseSalasEventos>> ListarTodosEventos()
         {
-            _logger.LogInformation("Listar todos os registros");
+            _logger.LogInformation("[EventosService] Listar todos os registros");
 
             var retornaLista = await _db.Eventos
                                         .Include(i => i.Sala)
@@ -48,7 +48,7 @@ namespace AgendaSalasEventos.Api.Business
 
         public async Task<Resultado> AtualizarEventoDaSala(Evento evento)
         {
-            _logger.LogInformation("Atualizar EventoId", evento.EventoId);
+            _logger.LogInformation("[EventosService] Atualizar EventoId", evento.EventoId);
 
             var resultado = new Resultado()
             {
@@ -76,7 +76,7 @@ namespace AgendaSalasEventos.Api.Business
 
         public async Task<Resultado> CriarEventoDaSala(Evento evento)
         {
-            _logger.LogInformation("Criar EventoId", evento.EventoId);
+            _logger.LogInformation("[EventosService] Criar EventoId", evento.EventoId);
 
             var resultado = new Resultado()
             {
@@ -123,7 +123,7 @@ namespace AgendaSalasEventos.Api.Business
 
         public async Task<bool> VerificarEventoHorarioExistente(int salaId, Guid? eventoId, DateTime dataInicial, DateTime dataFinal)
         {
-            _logger.LogInformation("Verifica se existem horários conflitantes na SalaId", salaId);
+            _logger.LogInformation("[EventosService] Verifica se existem horários conflitantes na SalaId", salaId);
 
             var existeHorario = await _db.Eventos
                                          .Where(t => t.SalaId == salaId

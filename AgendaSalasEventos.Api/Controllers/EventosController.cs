@@ -30,7 +30,7 @@ namespace AgendaSalasEventos.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<ResponseSalasEventos>> ListarTodosEventos()
         {
-            _logger.LogInformation($"Listagem de todos os eventos");
+            _logger.LogInformation($"[SalasEventos.Api.Eventos] Listagem de todos os eventos");
 
             try
             {
@@ -43,7 +43,7 @@ namespace AgendaSalasEventos.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro na chamada do 'Get'");
+                _logger.LogError(ex, "[SalasEventos.Api.Eventos] Erro na chamada do 'Get'");
 
                 return BadRequest("Erro ao executar chamada");
             }
@@ -54,7 +54,7 @@ namespace AgendaSalasEventos.Api.Controllers
         [ProducesResponseType(typeof(Resultado), (int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<Resultado>> CriarEventoDaSala(RequestEvento evento)
         {
-            _logger.LogInformation($"Criar eventos");
+            _logger.LogInformation($"[SalasEventos.Api.Eventos] Criar eventos");
 
             try
             {
@@ -71,17 +71,17 @@ namespace AgendaSalasEventos.Api.Controllers
 
                 if (resultado.Inconsistencias.Count > 0)
                 {
-                    _logger.LogError(Util.GetJSONResultado(resultado));
+                    _logger.LogError("[SalasEventos.Api.Eventos] " + Util.GetJSONResultado(resultado));
                     return BadRequest(resultado);
                 }
                 else
-                    _logger.LogInformation("Inclusão efetuada com sucesso");
+                    _logger.LogInformation("[SalasEventos.Api.Eventos] Inclusão efetuada com sucesso");
 
                 return Ok(resultado);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro na chamada do 'Post'");
+                _logger.LogError(ex, "[SalasEventos.Api.Eventos] Erro na chamada do 'Post'");
 
                 return BadRequest(new Resultado() 
                 { 
@@ -97,7 +97,7 @@ namespace AgendaSalasEventos.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<Resultado>> AtualizarEventoDaSala(RequestEvento evento)
         {
-            _logger.LogInformation($"Atualizar EventoId: {evento.EventoId}");
+            _logger.LogInformation($"[SalasEventos.Api.Eventos] Atualizar EventoId: {evento.EventoId}");
 
             try
             {
@@ -118,13 +118,13 @@ namespace AgendaSalasEventos.Api.Controllers
                     return BadRequest(resultado);
                 }
                 else
-                    _logger.LogInformation("Alteracao efetuada com sucesso");
+                    _logger.LogInformation("[SalasEventos.Api.Eventos] Alteracao efetuada com sucesso");
 
                 return Ok(resultado);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro na chamada do 'Put'");
+                _logger.LogError(ex, "[SalasEventos.Api.Eventos] Erro na chamada do 'Put'");
 
                 return BadRequest(new Resultado()
                 {
@@ -141,7 +141,7 @@ namespace AgendaSalasEventos.Api.Controllers
         public async Task<ActionResult<Resultado>> ExcluirEventoDaSala(Guid eventoId)
         {
 
-            _logger.LogInformation($"Excluir EventoId: {eventoId}");
+            _logger.LogInformation($"[SalasEventos.Api.Eventos] Excluir EventoId: {eventoId}");
 
             try
             {
@@ -152,13 +152,13 @@ namespace AgendaSalasEventos.Api.Controllers
                     return BadRequest(resultado);
                 }
                 else
-                    _logger.LogInformation("Exclusão efetuada com sucesso");
+                    _logger.LogInformation("[SalasEventos.Api.Eventos] Exclusão efetuada com sucesso");
 
                 return Ok(resultado);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro na chamada do 'Delete'");
+                _logger.LogError(ex, "[SalasEventos.Api.Eventos] Erro na chamada do 'Delete'");
 
                 return BadRequest(new Resultado()
                 {

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AgendaSalasEventos.Api.Business;
+using AgendaSalasEventos.Api.Data;
+using AgendaSalasEventos.Api.DI;
 using AgendaSalasEventos.Api.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,7 +31,7 @@ namespace AgendaSalasEventos.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<List<ResponseSalasCombo>>> ListarTodasSalasCombo()
         {
-            _logger.LogInformation($"Listagem de todos as salas para o combo");
+            _logger.LogInformation($"[SalasEventos.Api.Salas] Listagem de todos as salas para o combo");
 
             try
             {
@@ -42,7 +44,7 @@ namespace AgendaSalasEventos.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro na chamada do 'Get'");
+                _logger.LogError(ex, "[SalasEventos.Api.Salas] rro na chamada do 'Get'");
 
                 return BadRequest("Erro ao executar chamada");
             }
