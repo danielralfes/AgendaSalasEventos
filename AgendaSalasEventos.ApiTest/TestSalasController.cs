@@ -47,5 +47,19 @@ namespace AgendaSalasEventos.ApiTest
             Assert.IsNotNull(resp);
             Assert.IsTrue(resp.Any());
         }
+
+        [TestMethod]
+        public void TestMethodGetSalaService()
+        {
+
+            var resp = Task.Run(async () =>
+            {
+                return await serviceProvider.GetService<SalasService>().ListarTodasSalasCombo(); ;
+
+            }).GetAwaiter().GetResult();
+
+            Assert.IsNotNull(resp);
+            Assert.IsTrue(resp.Any());
+        }
     }
 }

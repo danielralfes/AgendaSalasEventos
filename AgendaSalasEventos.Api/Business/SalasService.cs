@@ -20,22 +20,6 @@ namespace AgendaSalasEventos.Api.Business
             _logger = logger;
             _db     = db;
         }
-        public async Task<List<ResponseSalas>> ListarTodasSalas()
-        {
-            _logger.LogInformation("[SalasService] Listar todos os registros");
-
-            var retornaLista = await _db.Salas
-                                        .Select(s=> new ResponseSalas()
-                                        {
-                                            SalaId   = s.SalaId,
-                                            SalaNome = s.Nome,
-                                        })
-                                        .OrderBy(t      => t.SalaNome)
-                                        .AsNoTracking()
-                                        .ToListAsync();
-
-            return retornaLista;
-        }
 
         public async Task<List<ResponseSalasCombo>> ListarTodasSalasCombo()
         {
