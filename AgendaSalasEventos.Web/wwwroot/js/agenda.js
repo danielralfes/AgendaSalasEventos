@@ -176,9 +176,11 @@ function ObterLista(data)
         switch (modalAction) {
             case 'edit':
                 alert('Atualização efetuada com sucesso!');
+                $('#eventosModal').modal('toggle');
                 break;
             case 'create':
                 alert('Criação efetuada com sucesso!');
+                $('#eventosModal').modal('toggle');
                 break;
             case 'delete':
                 alert('Exclusão efetuada com sucesso!');
@@ -187,8 +189,6 @@ function ObterLista(data)
             default:
                 console.log('Comando inválido ${modalAction}.');
         }
-
-        $('#eventosModal').modal('toggle');        
     }
 
     modalAction = null;
@@ -239,10 +239,11 @@ function validaCampos()
         campos += "\n- Data Inicial";
     if ($('#txtDataFinal').val() == "")
         campos += "\n- Data Final";
+
+    campos += verificaDatas($('#txtDataInicial').val(),$('#txtDataFinal').val());
+
     if ($('#txtResponsavel').val() == "")
         campos += "\n - Responsável";
-
-    //TODO: Fazer validação de datas
 
     if (campos != "")
     {
@@ -253,4 +254,37 @@ function validaCampos()
     {
         return true;
     }
+}
+
+function verificaDatas(dtInicial, dtFinal) {
+
+    var dtini = dtInicial;
+    var dtfim = dtFinal;
+
+    if ((dtini == '') && (dtfim == ''))
+    {
+        return "";
+    }
+
+    datInicio = new Date(dtini.substring(6, 10),
+        dtini.substring(3, 5),
+        dtini.substring(0, 2));
+    datInicio.setMonth(datInicio.getMonth() - 1);
+
+
+    datFim = new Date(dtfim.substring(6, 10),
+        dtfim.substring(3, 5),
+        dtfim.substring(0, 2));
+
+    datFim.setMonth(datFim.getMonth() - 1);
+
+    if (datInicio <= datFim)
+    {
+        return "";    
+    }
+    else
+    {
+        return "\n - Data Inicial é maior que Data Final";
+    }
+
 }
